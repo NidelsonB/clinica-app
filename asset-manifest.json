@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/clinica-app/static/js/main.2cbc4cc5.js",
+    "index.html": "/clinica-app/index.html",
+    "main.2cbc4cc5.js.map": "/clinica-app/static/js/main.2cbc4cc5.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.2cbc4cc5.js"
+  ]
+}
