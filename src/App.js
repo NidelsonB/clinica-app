@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import ClinicHeader from './components/ClinicHeader';
 import TherapyForm from './components/TherapyForm';
 import MonthCalendar from './components/MonthCalendar';
+import AuthPage from './AuthPage';
 
 const App = () => {
   const [appointments, setAppointments] = useState(() => {
     const saved = localStorage.getItem('clinicAppointments');
     return saved ? JSON.parse(saved) : [];
+  });
+
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return !!localStorage.getItem('token');
   });
 
   useEffect(() => {
@@ -20,6 +25,10 @@ const App = () => {
   const deleteAppointment = (id) => {
     setAppointments(appointments.filter(app => app.id !== id));
   };
+
+  if (!isAuthenticated) {
+    return <AuthPage onAuth={() => setIsAuthenticated(true)} />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -36,11 +45,18 @@ const App = () => {
             />
           </div>
         </div>
+        <button
+          className="mt-4 text-sm text-red-600 hover:underline"
+          onClick={() => {
+            localStorage.removeItem('token');
+            setIsAuthenticated(false);
+          }}
+        >
+          Cerrar sesión
+        </button>
       </div>
     </div>
   );
 };
 
 export default App;
-
-// DONE
